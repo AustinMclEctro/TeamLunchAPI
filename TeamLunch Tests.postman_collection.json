@@ -1,0 +1,357 @@
+{
+	"info": {
+		"name": "TeamLunch Tests",
+		"_postman_id": "3a2bfaeb-970a-40f2-ac6a-fceeb3701729",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TeamMember",
+			"description": "Team member requests.",
+			"item": [
+				{
+					"name": "http://localhost:50273/TeamMember",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/TeamMember",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"TeamMember"
+							]
+						},
+						"description": "Get all team members"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/TeamMember/Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "id",
+								"value": "0"
+							},
+							{
+								"key": "restrictions",
+								"value": ""
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/TeamMember/Add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"TeamMember",
+								"Add"
+							]
+						},
+						"description": "Add a team member"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/TeamMember/Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "id",
+								"value": "0"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/TeamMember/Delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"TeamMember",
+								"Delete"
+							]
+						},
+						"description": "Delete the record for a team member"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/TeamMember/Get",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "id",
+								"value": "0"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/TeamMember/Get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"TeamMember",
+								"Get"
+							]
+						},
+						"description": "Get a specific team member."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/TeamMember/Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "id",
+								"value": "0"
+							},
+							{
+								"key": "restrictions",
+								"value": ""
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/TeamMember/Edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"TeamMember",
+								"Edit"
+							]
+						},
+						"description": "Edit a team member."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurant",
+			"description": "Restaurant requests.",
+			"item": [
+				{
+					"name": "http://localhost:50273/Restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/Restaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"Restaurant"
+							]
+						},
+						"description": "Returns all restaurants."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/Restaurant/Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "name",
+								"value": "A"
+							},
+							{
+								"key": "rating",
+								"value": "1"
+							},
+							{
+								"key": "totalMeals",
+								"value": "4"
+							},
+							{
+								"key": "numV",
+								"value": "1"
+							},
+							{
+								"key": "numG",
+								"value": "1"
+							},
+							{
+								"key": "numN",
+								"value": "1"
+							},
+							{
+								"key": "numF",
+								"value": "0"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/Restaurant/Add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"Restaurant",
+								"Add"
+							]
+						},
+						"description": "Returns all restaurants."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/Restaurant/Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "name",
+								"value": "A"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/Restaurant/Get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"Restaurant",
+								"Get"
+							]
+						},
+						"description": "Returns a specific restaurant by name."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/Restaurant/Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "name",
+								"value": "A"
+							},
+							{
+								"key": "rating",
+								"value": "3"
+							},
+							{
+								"key": "totalMeals",
+								"value": "5"
+							},
+							{
+								"key": "numV",
+								"value": "1"
+							},
+							{
+								"key": "numG",
+								"value": "1"
+							},
+							{
+								"key": "numN",
+								"value": "1"
+							},
+							{
+								"key": "numF",
+								"value": "1"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/Restaurant/Edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"Restaurant",
+								"Edit"
+							]
+						},
+						"description": "Edit the information of an existing restaurant."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:50273/Restaurant/Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "name",
+								"value": "B"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:50273/Restaurant/Delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50273",
+							"path": [
+								"Restaurant",
+								"Delete"
+							]
+						},
+						"description": "Delete a restaurant."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "http://localhost:50273/Meals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:50273/Meals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50273",
+					"path": [
+						"Meals"
+					]
+				},
+				"description": "Returns the list of optimal meals for team members."
+			},
+			"response": []
+		}
+	]
+}
