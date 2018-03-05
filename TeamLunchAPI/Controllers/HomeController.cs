@@ -18,59 +18,81 @@ namespace TeamLunchAPI.Controllers
             return View();
         }
 
-        // GET request which returns the optimal meal list.
         /// <summary>
-        /// 
+        /// GET request to populate the data class with pre-made team members and restaurants.
+        /// </summary>
+        [HttpGet]
+        [Route("/SmallScenario")]
+        public void SmallScenarioRequest()
+        {
+            Data.Instance.SetupSmallScenario();
+        }
+
+        /// <summary>
+        /// GET request to populate the data class with the example from the Code Challenge spec sheet.
+        /// </summary>
+        [HttpGet]
+        [Route("/LargeScenario")]
+        public void LargeScenarioRequest()
+        {
+            Data.Instance.SetupLargeScenario();
+        }
+
+        /// <summary>
+        /// Returns a list of restaurants that is sorted from highest rating to lowest rating.
+        /// </summary>
+        /// <param name="restaurants"></param>
+        public List<Restaurant> SortHighestRating(List<Restaurant> restaurants)
+        {
+            return restaurants.OrderByDescending(restaurant => restaurant.rating).ToList();
+        }
+
+        /// <summary>
+        /// GET request which returns the optimal meal dictionary.<para />
+        /// Key: a key-value pair of the person and their dietary restriction, if any. Value: the name of the restaurant from which the person's meal is from.<para/>
+        /// Returns a dictionary that illustrates which people get what meals, and from which restaurant.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("/Meals")]
         public Dictionary<KeyValuePair<string, string>, string> GetMeals()
         {
-            List<Restaurant> sortedCopy = Data.Instance.Restaurants.OrderByDescending(restaurant => restaurant.rating).ToList(); // sort for highest rated restaurants first
-            // unit test for meal subtraction (is it working on sorted or original list? should be on copy)
+            List<Restaurant> sorted = SortHighestRating(Data.Instance.Restaurants);
 
-            Dictionary<string, string> people = Data.Instance.TeamMembers;      // remove people from this dictionary as their meal is found
-            List<string> peopleToRemove = new List<string>();                   // list of ids to remove from people dictionary
+            Dictionary<string, string> people = Data.Instance.GetTeamMembersCopy();      // remove people from this dictionary as their meal is found
+            List<string> peopleToRemove = new List<string>();                           // list of ids to remove from people dictionary
 
             // Dictionary to illustrate which people get what meals from where.
             // Contains people keys (keyvaluepairs- id and diet restr.) and restaurant name values.
             Dictionary<KeyValuePair<string, string>, string> mealOrder = new Dictionary<KeyValuePair<string, string>, string>();
 
-            foreach (Restaurant restaurant in sortedCopy)
+            foreach (Restaurant restaurant in sorted)
             {
+                // get how many regular meals can be provided
+                int regularMeals = restaurant.totalMeals - (restaurant.specialMeals["v"] + restaurant.specialMeals["g"] + restaurant.specialMeals["n"] + restaurant.specialMeals["f"]);
+                // make a clone of the special meals dictionary so we can decrement amounts remaining w/o affecting the original dictionary
+                Dictionary<string, int> specMealsClone = new Dictionary<string, int> { { "v", restaurant.specialMeals["v"] }, { "g", restaurant.specialMeals["g"] }, { "n", restaurant.specialMeals["n"] }, { "f", restaurant.specialMeals["f"] } }; 
+
                 foreach (KeyValuePair<string, string> teamMember in people)
                 {
-                    if (restaurant.totalMeals > 0)
+                    if (teamMember.Value == string.Empty && regularMeals > 0)
                     {
-                        if (teamMember.Value == string.Empty)
-                        {
-                            // assign this person a meal, no dietary restrictions
-                            mealOrder.Add(teamMember, restaurant.name);
-                            restaurant.totalMeals--;
-                            System.Diagnostics.Debug.Write("+++ TeamMember " + teamMember.Key + " ASSIGNED REGULAR MEAL");
-                            peopleToRemove.Add(teamMember.Key);
-                        }
-                        else // the person has dietary restrictions, see if the restaurant can accommodate them
-                        {
-                            string dietRestr = teamMember.Value;
-                            if (restaurant.specialMeals[dietRestr] > 0)
-                            {
-                                mealOrder.Add(teamMember, restaurant.name);
-                                restaurant.totalMeals--;
-                                restaurant.specialMeals[dietRestr]--;
-                                System.Diagnostics.Debug.Write(">>> TeamMember " + teamMember.Key + " ASSIGNED " + teamMember.Value + " MEAL");
-                                peopleToRemove.Add(teamMember.Key);
-                            }
-                            else
-                            {
-                                // TODO: might have to implement something here?
-                                //throw new NotImplementedException();
-                            }
-                        }
+                        // assign this person a meal, no dietary restrictions
+                        mealOrder.Add(teamMember, restaurant.name);
+                        regularMeals--;
+                        System.Diagnostics.Debug.Write("\n+++ TeamMember " + teamMember.Key + " ASSIGNED REGULAR MEAL\n");
+                        peopleToRemove.Add(teamMember.Key);
                     }
-                    else
-                        break;
+                    else if (teamMember.Value != string.Empty && specMealsClone[teamMember.Value] > 0) // the person has dietary restrictions, see if the restaurant can accommodate them
+                    {
+                        mealOrder.Add(teamMember, restaurant.name);
+                        specMealsClone[teamMember.Value]--;
+                        System.Diagnostics.Debug.Write("\n>>> TeamMember " + teamMember.Key + " ASSIGNED " + teamMember.Value + " MEAL\n");
+                        peopleToRemove.Add(teamMember.Key);
+                    }
+
+                    // TODO: might have to implement something else here? Account for people who don't get a meal...
+                    //throw new NotImplementedException();
                 }
 
                 // Update who we have accounted for

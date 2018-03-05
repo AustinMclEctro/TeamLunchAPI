@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+/// <summary>
+/// A class to hold relevant information for an individual restaurant.
+/// </summary>
 public class Restaurant
 {
     public string name;
@@ -10,14 +13,24 @@ public class Restaurant
     public int totalMeals;
     public Dictionary<string, int> specialMeals = new Dictionary<string, int>();
 
+    /// <summary>
+    /// No argument constructor for a restaurant.
+    /// </summary>
     public Restaurant() { }
 
-    public Restaurant(string n, int r, int t, Dictionary<string, int> s)
+    /// <summary>
+    /// Constructor for creating a restaurant.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="rating"></param>
+    /// <param name="totalMeals"></param>
+    /// <param name="specialMeals"></param>
+    public Restaurant(string name, int rating, int totalMeals, Dictionary<string, int> specialMeals)
     {
-        name = n;
-        rating = r;
-        totalMeals = t;
-        specialMeals = s;
+        this.name = name;
+        this.rating = rating;
+        this.totalMeals = totalMeals;
+        this.specialMeals = specialMeals;
     }
 }
 

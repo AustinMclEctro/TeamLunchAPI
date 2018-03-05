@@ -11,23 +11,31 @@ namespace TeamLunchAPI.Controllers
     [Route("/Restaurant")]
     public class RestaurantController : Controller
     {
-        // GET: /Restaurant
+        /// <summary>
+        /// GET request to return all restaurants. No header parameters needed.
+        /// </summary>
         [HttpGet]
+        [Route("/Restaurant")]
         public List<Restaurant> GetAll()
         {
             return Data.Instance.Restaurants;
         }
 
-        // GET request to return a restaurant with specific name.
+        /// <summary>
+        /// GET request to return a restaurant with specific name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("/Restaurant/Get")]
         public Restaurant Get([FromHeader] string name)
         {
-            //return Data.Instance.Restaurants.FirstOrDefault(restaurant => name == restaurant.name);
             return Data.Instance.GetRestaurant(name);
         }
 
-        // POST request to add a new restaurant.
+        /// <summary>
+        /// POST request to add a new restaurant.
+        /// </summary>
         [HttpPost]
         [Route("/Restaurant/Add")]
         public IActionResult Add([FromHeader] string name,
@@ -59,8 +67,10 @@ namespace TeamLunchAPI.Controllers
                 return BadRequest();
         }
 
-        // PUT request to edit an existing restaurant.
-        // Restaurant names cannot be edited (create a new restaurant with different name).
+
+        /// <summary>
+        /// PUT request to edit an existing restaurant.<para/>
+        /// </summary>
         [HttpPut]
         [Route("/Restaurant/Edit")]
         public IActionResult Edit([FromHeader] string name,

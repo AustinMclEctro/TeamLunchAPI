@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace TeamLunchAPI.Controllers
 {
@@ -12,15 +11,22 @@ namespace TeamLunchAPI.Controllers
     [Route("/TeamMember")]
     public class TeamMemberController : Controller
     {
-        // GET request to return all team members.
-        // No headers needed.
+        /// <summary>
+        /// GET request to return all team members. No header parameters needed.
+        /// </summary>
         [HttpGet]
+        [Route("/TeamMember")]
         public Dictionary<string, string> GetAll()
         {
             return Data.Instance.TeamMembers;
         }
 
-        // GET request to return a team member with specific id.
+        /// <summary>
+        /// GET request to return a team member with specific id.<para/>
+        /// Specify the desired id as a header parameter.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("/TeamMember/Get")]
         public KeyValuePair<string, string> Get([FromHeader] string id)
@@ -31,7 +37,13 @@ namespace TeamLunchAPI.Controllers
                 return new KeyValuePair<string, string>();
         }
 
-        // POST request to add a new team member.
+        /// <summary>
+        /// POST request to add a new team member.<para/>
+        /// Specify the desired id and dietary restriction as header parameters.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="restrictions"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("/TeamMember/Add")]
         public IActionResult Add([FromHeader] string id, [FromHeader] string restrictions)
@@ -47,8 +59,14 @@ namespace TeamLunchAPI.Controllers
                 return BadRequest();
         }
 
-        // PUT request to edit an existing team member.
-        // Team member id cannot be edited (create new team member with different id).
+
+        /// <summary>
+        /// PUT request to edit an existing team member.<para/>
+        /// Specify the desired id and dietary restriction as header parameters.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="restrictions"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("/TeamMember/Edit")]
         public IActionResult Edit([FromHeader] string id, [FromHeader] string restrictions)
@@ -63,7 +81,12 @@ namespace TeamLunchAPI.Controllers
                 return BadRequest();
         }
 
-        // DELETE request to delete an existing team member.
+        /// <summary>
+        /// DELETE request to delete an existing team member.<para/>
+        /// Specify the desired team member to delete by their id as a header parameter.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("/TeamMember/Delete")]
         public IActionResult Delete([FromHeader] string id)
