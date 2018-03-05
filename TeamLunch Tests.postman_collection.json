@@ -352,6 +352,48 @@
 				"description": "Returns the list of optimal meals for team members."
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:50273/SmallScenario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:50273/SmallScenario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50273",
+					"path": [
+						"SmallScenario"
+					]
+				},
+				"description": "Setup a scenario of pre-made team members and restaurants."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:50273/LargeScenario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:50273/LargeScenario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50273",
+					"path": [
+						"LargeScenario"
+					]
+				},
+				"description": "Setup a scenario of pre-made team members and restaurants."
+			},
+			"response": []
 		}
 	]
 }
