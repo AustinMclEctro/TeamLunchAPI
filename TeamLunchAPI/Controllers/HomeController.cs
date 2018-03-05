@@ -27,7 +27,7 @@ namespace TeamLunchAPI.Controllers
         [Route("/Meals")]
         public Dictionary<KeyValuePair<string, string>, string> GetMeals()
         {
-            List<Restaurant> sorted = Data.Instance.Restaurants.OrderByDescending(restaurant => restaurant.rating).ToList(); // sort for highest rated stuff first
+            List<Restaurant> sortedCopy = Data.Instance.Restaurants.OrderByDescending(restaurant => restaurant.rating).ToList(); // sort for highest rated restaurants first
             // unit test for meal subtraction (is it working on sorted or original list? should be on copy)
 
             Dictionary<string, string> people = Data.Instance.TeamMembers;      // remove people from this dictionary as their meal is found
@@ -37,7 +37,7 @@ namespace TeamLunchAPI.Controllers
             // Contains people keys (keyvaluepairs- id and diet restr.) and restaurant name values.
             Dictionary<KeyValuePair<string, string>, string> mealOrder = new Dictionary<KeyValuePair<string, string>, string>();
 
-            foreach (Restaurant restaurant in sorted)
+            foreach (Restaurant restaurant in sortedCopy)
             {
                 foreach (KeyValuePair<string, string> teamMember in people)
                 {
@@ -64,7 +64,8 @@ namespace TeamLunchAPI.Controllers
                             }
                             else
                             {
-                                // handle the possibility for diet restricted people not getting a meal?
+                                // TODO: might have to implement something here?
+                                //throw new NotImplementedException();
                             }
                         }
                     }

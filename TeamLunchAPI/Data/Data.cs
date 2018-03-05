@@ -11,9 +11,9 @@ public sealed class Data
 {
     /// <summary>
     /// Dictionary of team members.
-    /// Key: int, employee id.
+    /// Key: string, employee id.
     /// Value: string, dietary restrictions.<para />
-    /// FINISH DESCRIPTION
+    /// Team members are meant to have at most one dietary restriction: one of v, g, n, or f.
     /// </summary>
     public Dictionary<string, string> TeamMembers = new Dictionary<string, string>();
 
@@ -47,4 +47,29 @@ public sealed class Data
     }
 
     public static Data Instance { get { return instance; } }
+
+    /// <summary>
+    /// Call to populate our restaurant and team member records with a small set of pre-made data.
+    /// </summary>
+    public void SetupSmallScenario()
+    {
+        // Set up some team members
+        TeamMembers.Add("0", "");
+        TeamMembers.Add("1", "");
+        TeamMembers.Add("2", "");
+        TeamMembers.Add("3", "");
+        TeamMembers.Add("4", "");
+        TeamMembers.Add("5", "v");
+        TeamMembers.Add("6", "v");
+        TeamMembers.Add("7", "v");
+        TeamMembers.Add("8", "v");
+    }
+
+    /// <summary>
+    /// Call to populate our restaurant and team member records with a small set of pre-made data.
+    /// </summary>
+    public void SetupLargeScenario()
+    {
+
+    }
 }
